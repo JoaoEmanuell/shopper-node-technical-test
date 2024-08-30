@@ -1,0 +1,35 @@
+{
+  "name": "node_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev src/index.ts",
+    "start": "node dist/src/index.js",
+    "migration:run": "prisma migrate deploy",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "prisma studio --port 8081",
+    "setup": "node setup.mjs",
+    "test": "node --import=tsx --test --experimental-test-coverage ./tests/app.test.mts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.5.1",
+    "prisma": "^5.4.2",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.17.1",
+    "@prisma/client": "^5.4.2",
+    "class-validator": "^0.14.1",
+    "dotenv": "^16.4.5",
+    "reflect-metadata": "^0.2.2",
+    "sharp": "^0.33.5",
+    "sqlite3": "^5.1.7"
+  }
+}
