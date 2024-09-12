@@ -6,9 +6,7 @@ USER node
 
 WORKDIR /home/node/
 
-COPY --chown=node:node shopper-node-technical-test .
-
-COPY --chown=node:node .env .
+COPY --chown=node:node . .
 
 RUN npm install -y && \ 
     npm run setup && \ 
