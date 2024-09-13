@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -8,7 +8,7 @@ import {
 } from "./ui/navigation-menu";
 import { HomeInitSession } from "./homeSessions/init";
 import { HomeUploadSession } from "./homeSessions/upload";
-import { CustomerCodeContext } from "@/contexts/customerCodeContext";
+import { HomeConfirmSession } from "./homeSessions/confirm";
 
 export const HomeComponent = () => {
   const [activeTab, setActiveTab] = useState("init");
@@ -39,6 +39,16 @@ export const HomeComponent = () => {
               >
                 Nova medição
               </NavigationMenuItem>
+              <NavigationMenuItem
+                onClick={() => {
+                  setActiveTab("confirm");
+                }}
+                className={`cursor-pointer text-primary-foreground p-2 rounded-sm hover:bg-primary transition-all ${
+                  activeTab === "confirm" ? "bg-primary" : "bg-blue-400"
+                }`}
+              >
+                Confirmar medição
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
@@ -52,6 +62,11 @@ export const HomeComponent = () => {
         {activeTab === "upload" && (
           <div className="bg-card text-card-foreground rounded-lg p-6 shadow-md overflow-x-auto">
             <HomeUploadSession />
+          </div>
+        )}
+        {activeTab === "confirm" && (
+          <div className="bg-card text-card-foreground rounded-lg p-6 shadow-md overflow-x-auto">
+            <HomeConfirmSession />
           </div>
         )}
       </main>

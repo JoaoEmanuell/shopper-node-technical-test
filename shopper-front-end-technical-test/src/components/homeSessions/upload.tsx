@@ -12,6 +12,8 @@ import { GetPhoto } from "./upload/getPhoto";
 import { z } from "zod";
 import { GetAlert } from "../ui/getAlert";
 import { uploadSchema } from "@/schemas/uploadZodSchema";
+import { LastMeasureUUIDContext } from "@/contexts/lastMeasureUUIDContext";
+import { LastMeasureValueContext } from "@/contexts/lastMeasureValueContext";
 
 type apiMeasureDataType = {
   image_url: string;
@@ -23,6 +25,12 @@ export const HomeUploadSession = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [step, setStep] = useState(0);
   const [customerCode, setCustomerCode] = useContext(CustomerCodeContext);
+  const [lastMeasureUUIDContext, setLastMeasureUUIDContext] = useContext(
+    LastMeasureUUIDContext
+  );
+  const [lastMeasureValueContext, setLastMeasureValueContext] = useContext(
+    LastMeasureValueContext
+  );
   const [measureType, setMeasureType] = useState("");
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [alert, setAlert] = useState<JSX.Element | null>(null);
@@ -73,6 +81,8 @@ export const HomeUploadSession = () => {
     if (response.status === 200) {
       const json = await response.json();
       setApiMeasureData(json as apiMeasureDataType);
+      setLastMeasureUUIDContext(json["measure_uuid"]);
+      setLastMeasureValueContext(json["measure_value"]);
       setStep(5); // end
     } else if (response.status === 400 || response.status === 409) {
       const json = await response.json();

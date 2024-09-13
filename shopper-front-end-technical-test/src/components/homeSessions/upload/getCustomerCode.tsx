@@ -7,8 +7,6 @@ import { useContext } from "react";
 
 export const GetCustomerCode = () => {
   const [customerCode, setCustomerCode] = useContext(CustomerCodeContext);
-  console.log(`customer code context: ${customerCode}`);
-
   return (
     <div>
       <Label className="" htmlFor="customerInput">

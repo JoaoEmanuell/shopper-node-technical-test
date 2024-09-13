@@ -6,8 +6,8 @@ export const HomeInitSession = () => {
   return (
     <div>
       <p className="mx-4">
-        Seja bem vindo ao Dashboard de medição,{" "}
-        {customerCode !== "" ? `${customerCode}!` : ""}
+        Seja bem vindo ao Dashboard de medição
+        {customerCode !== "" ? `, ${customerCode}!` : "!"}
       </p>
       <p className="mx-4">Use o menu acima para navegar entre as ações.</p>
     </div>
