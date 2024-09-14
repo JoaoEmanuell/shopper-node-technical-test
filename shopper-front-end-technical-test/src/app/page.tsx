@@ -1,6 +1,7 @@
 "use client";
 
 import { HomeComponent } from "@/components/home";
+import { CurrentTabContext } from "@/contexts/currentTabContext";
 import { CustomerCodeContext } from "@/contexts/customerCodeContext";
 import { LastMeasureUUIDContext } from "@/contexts/lastMeasureUUIDContext";
 import { LastMeasureValueContext } from "@/contexts/lastMeasureValueContext";
@@ -10,6 +11,7 @@ export default function Home() {
   const [customerCode, setCustomerCode] = useState("");
   const [lastMeasureUUIDContext, setLastMeasureUUIDContext] = useState("");
   const [lastMeasureValueContext, setLastMeasureValueContext] = useState(0);
+  const [currentTabContext, setCurrentTabContext] = useState("list");
 
   return (
     <CustomerCodeContext.Provider value={[customerCode, setCustomerCode]}>
@@ -19,7 +21,11 @@ export default function Home() {
         <LastMeasureValueContext.Provider
           value={[lastMeasureValueContext, setLastMeasureValueContext]}
         >
-          <HomeComponent />
+          <CurrentTabContext.Provider
+            value={[currentTabContext, setCurrentTabContext]}
+          >
+            <HomeComponent />
+          </CurrentTabContext.Provider>
         </LastMeasureValueContext.Provider>
       </LastMeasureUUIDContext.Provider>
     </CustomerCodeContext.Provider>

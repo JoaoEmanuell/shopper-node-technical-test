@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -9,9 +9,13 @@ import {
 import { HomeInitSession } from "./homeSessions/init";
 import { HomeUploadSession } from "./homeSessions/upload";
 import { HomeConfirmSession } from "./homeSessions/confirm";
+import { HomeListSession } from "./homeSessions/list";
+import { CurrentTabContext } from "@/contexts/currentTabContext";
 
 export const HomeComponent = () => {
-  const [activeTab, setActiveTab] = useState("init");
+  const [currentTabContext, setCurrentTabContext] =
+    useContext(CurrentTabContext);
+
   return (
     <div>
       <h1 className="text-xl mt-4 mx-2">Dashboard de medição</h1>
@@ -21,52 +25,67 @@ export const HomeComponent = () => {
             <NavigationMenuList className="space-x-4">
               <NavigationMenuItem
                 onClick={() => {
-                  setActiveTab("init");
+                  setCurrentTabContext("init");
                 }}
                 className={`cursor-pointer text-primary-foreground p-2 rounded-sm hover:bg-primary transition-all ${
-                  activeTab === "init" ? "bg-primary" : "bg-blue-400"
+                  currentTabContext === "init" ? "bg-primary" : "bg-blue-400"
                 }`}
               >
                 Inicio
               </NavigationMenuItem>
               <NavigationMenuItem
                 onClick={() => {
-                  setActiveTab("upload");
+                  setCurrentTabContext("upload");
                 }}
                 className={`cursor-pointer text-primary-foreground p-2 rounded-sm hover:bg-primary transition-all ${
-                  activeTab === "upload" ? "bg-primary" : "bg-blue-400"
+                  currentTabContext === "upload" ? "bg-primary" : "bg-blue-400"
                 }`}
               >
                 Nova medição
               </NavigationMenuItem>
               <NavigationMenuItem
                 onClick={() => {
-                  setActiveTab("confirm");
+                  setCurrentTabContext("confirm");
                 }}
                 className={`cursor-pointer text-primary-foreground p-2 rounded-sm hover:bg-primary transition-all ${
-                  activeTab === "confirm" ? "bg-primary" : "bg-blue-400"
+                  currentTabContext === "confirm" ? "bg-primary" : "bg-blue-400"
                 }`}
               >
                 Confirmar medição
+              </NavigationMenuItem>
+              <NavigationMenuItem
+                onClick={() => {
+                  setCurrentTabContext("list");
+                }}
+                className={`cursor-pointer text-primary-foreground p-2 rounded-sm hover:bg-primary transition-all ${
+                  currentTabContext === "list" ? "bg-primary" : "bg-blue-400"
+                }`}
+              >
+                Listar medições
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
       </header>
       <main className="flex-1 bg-background p-8">
-        {activeTab === "init" && (
+        {currentTabContext === "init" && (
           <div className="bg-card text-card-foreground rounded-lg p-6 shadow-md overflow-x-auto">
             <HomeInitSession />
           </div>
         )}
-        {activeTab === "upload" && (
+        {currentTabContext === "upload" && (
           <div className="bg-card text-card-foreground rounded-lg p-6 shadow-md overflow-x-auto">
             <HomeUploadSession />
           </div>
         )}
-        {activeTab === "confirm" && (
+        {currentTabContext === "confirm" && (
           <div className="bg-card text-card-foreground rounded-lg p-6 shadow-md overflow-x-auto">
             <HomeConfirmSession />
+          </div>
+        )}
+        {currentTabContext === "list" && (
+          <div className="bg-card text-card-foreground rounded-lg p-6 shadow-md overflow-x-auto">
+            <HomeListSession />
           </div>
         )}
       </main>

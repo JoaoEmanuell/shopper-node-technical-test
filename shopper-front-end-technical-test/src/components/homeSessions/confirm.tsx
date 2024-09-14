@@ -16,8 +16,8 @@ export const HomeConfirmSession = () => {
     LastMeasureValueContext
   );
 
-  const [measureUUID, setMeasureUUID] = useState("");
-  const [measureValue, setMeasureValue] = useState(0);
+  const [measureUUID, setMeasureUUID] = useState(lastMeasureUUIDContext);
+  const [measureValue, setMeasureValue] = useState(lastMeasureValueContext);
 
   const [alert, setAlert] = useState<JSX.Element | null>(null);
 

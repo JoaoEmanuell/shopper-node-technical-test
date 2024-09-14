@@ -14,6 +14,8 @@ import { GetAlert } from "../ui/getAlert";
 import { uploadSchema } from "@/schemas/uploadZodSchema";
 import { LastMeasureUUIDContext } from "@/contexts/lastMeasureUUIDContext";
 import { LastMeasureValueContext } from "@/contexts/lastMeasureValueContext";
+import { CurrentTabContext } from "@/contexts/currentTabContext";
+import { Anchor } from "../ui/anchor";
 
 type apiMeasureDataType = {
   image_url: string;
@@ -31,6 +33,9 @@ export const HomeUploadSession = () => {
   const [lastMeasureValueContext, setLastMeasureValueContext] = useContext(
     LastMeasureValueContext
   );
+  const [currentTabContext, setCurrentTabContext] =
+    useContext(CurrentTabContext);
+
   const [measureType, setMeasureType] = useState("");
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [alert, setAlert] = useState<JSX.Element | null>(null);
@@ -145,8 +150,17 @@ export const HomeUploadSession = () => {
             <p>Valor da medição: {apiMeasureData.measure_value}</p>
             <p>Id da medição: {apiMeasureData.measure_uuid}</p>
             <p>
-              Você pode confirmar a medição clicando no botão &quot;Confirmar
-              leitura&quot;
+              Você pode confirmar a medição{" "}
+              <Anchor
+                href="#"
+                className="text-primary underline-offset-4 hover:underline"
+                onClick={() => {
+                  setCurrentTabContext("confirm");
+                }}
+                variant="blue"
+              >
+                clicando aqui
+              </Anchor>
             </p>
           </div>
         )}
