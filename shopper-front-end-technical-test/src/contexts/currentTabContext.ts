@@ -1,5 +1,4 @@
+import { contextStringType } from "@/utils/types";
 import { createContext } from "react";
 
-export const CurrentTabContext = createContext<
-  "init" | "upload" | "confirm" | "list"
->("init");
+export const CurrentTabContext = createContext<contextStringType | null>(null);

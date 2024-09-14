@@ -28,9 +28,7 @@ const measureTypeHashmap = {
 
 export const HomeListSession = () => {
   const [customerCode, setCustomerCode] = useContext(CustomerCodeContext);
-  const [measureType, setMeasureType] = useContext<"water" | "gas" | "">(
-    LastMeasureTypeContext
-  );
+  const [measureType, setMeasureType] = useContext(LastMeasureTypeContext);
   const [measures, setMeasures] = useState<measureApiType[] | null>(null);
   const [alert, setAlert] = useState<JSX.Element | null>(null);
 

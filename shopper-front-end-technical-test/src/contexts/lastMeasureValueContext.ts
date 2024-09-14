@@ -1,3 +1,5 @@
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 
-export const LastMeasureValueContext = createContext(0);
+export const LastMeasureValueContext = createContext<
+  [number, Dispatch<SetStateAction<number>>] | null
+>(null);

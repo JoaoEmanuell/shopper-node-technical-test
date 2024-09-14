@@ -9,6 +9,6 @@ COPY --chown=node:node . .
 RUN npm install -y && \ 
     npm run build
 
-EXPOSE 3000
+EXPOSE 8080
 
 CMD ["npm", "run", "start"]
