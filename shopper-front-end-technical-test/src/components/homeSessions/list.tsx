@@ -11,6 +11,7 @@ import { axios } from "@/lib/axios";
 import { GetAlert } from "../ui/getAlert";
 import { DataTable } from "../ui/dataTable";
 import { ListDataTableColumnsSchema } from "@/schemas/listDataTableSchema";
+import { LastMeasureTypeContext } from "@/contexts/lastMeasureTypeContext";
 
 export type measureApiType = {
   measure_uuid: string;
@@ -20,15 +21,22 @@ export type measureApiType = {
   image_url: string;
 };
 
+const measureTypeHashmap = {
+  water: "Água",
+  gas: "Gás",
+};
+
 export const HomeListSession = () => {
   const [customerCode, setCustomerCode] = useContext(CustomerCodeContext);
-  const [measureType, setMeasureType] = useState(null);
+  const [measureType, setMeasureType] = useContext<"water" | "gas" | "">(
+    LastMeasureTypeContext
+  );
   const [measures, setMeasures] = useState<measureApiType[] | null>(null);
   const [alert, setAlert] = useState<JSX.Element | null>(null);
 
   const getMeasures = async () => {
     setAlert(null); // reset alert
-    if (!measureType) {
+    if (measureType === "") {
       setAlert(
         <GetAlert
           title="Alerta"
@@ -69,7 +77,11 @@ export const HomeListSession = () => {
         <GetSelect
           itens={measureTypeSchema}
           onValueChange={setMeasureType}
-          placeholder="Tipo da medição"
+          placeholder={
+            measureType
+              ? measureTypeHashmap[measureType as "water" | "gas"]
+              : "Tipo da medição"
+          }
         />
         <Button onClick={getMeasures}>Listar medições</Button>
       </div>

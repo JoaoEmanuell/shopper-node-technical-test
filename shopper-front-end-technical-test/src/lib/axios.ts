@@ -1,8 +1,11 @@
 import { Axios } from "axios";
 
 let baseURL;
+let windowUrl = "";
 
-const windowUrl = window.location.origin;
+try {
+  windowUrl = window.location.origin;
+} catch (err) {}
 
 // define the url for api
 

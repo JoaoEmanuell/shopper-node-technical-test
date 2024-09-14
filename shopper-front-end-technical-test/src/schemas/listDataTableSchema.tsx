@@ -1,13 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import { measureApiType } from "@/components/homeSessions/list";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, CircleHelp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CurrentTabContext } from "@/contexts/currentTabContext";
 import { LastMeasureUUIDContext } from "@/contexts/lastMeasureUUIDContext";
-import { LastMeasureValueContext } from "@/contexts/lastMeasureValueContext";
 import { useContext } from "react";
 import { Anchor } from "@/components/ui/anchor";
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "@/components/ui/hover-card";
 
 export const ListDataTableColumnsSchema = () => {
   const [lastMeasureUUIDContext, setLastMeasureUUIDContext] = useContext(
@@ -62,7 +66,7 @@ export const ListDataTableColumnsSchema = () => {
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Confirmada
+            Confirmação
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         );
@@ -89,15 +93,18 @@ export const ListDataTableColumnsSchema = () => {
     },
     {
       accessorKey: "image_url",
-      header: ({ column }) => {
+      header: () => {
         return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Imagem
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
+          <HoverCard>
+            <HoverCardTrigger className="hover:underline cursor-pointer flex items-center align-middle">
+              Imagem
+              <CircleHelp width={16} height={16} className="ml-1" />
+            </HoverCardTrigger>
+            <HoverCardContent>
+              Dica: você pode clicar em cima da imagem para abri-la em uma nova
+              guia!
+            </HoverCardContent>
+          </HoverCard>
         );
       },
       cell: ({ row }) => {

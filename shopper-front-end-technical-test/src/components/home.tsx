@@ -1,16 +1,12 @@
 "use client";
 
-import { useContext, useState } from "react";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-} from "./ui/navigation-menu";
+import { useContext } from "react";
 import { HomeInitSession } from "./homeSessions/init";
 import { HomeUploadSession } from "./homeSessions/upload";
 import { HomeConfirmSession } from "./homeSessions/confirm";
 import { HomeListSession } from "./homeSessions/list";
 import { CurrentTabContext } from "@/contexts/currentTabContext";
+import { CreateHomeMenu } from "./ui/home-menu";
 
 export const HomeComponent = () => {
   const [currentTabContext, setCurrentTabContext] =
@@ -20,52 +16,7 @@ export const HomeComponent = () => {
     <div>
       <h1 className="text-xl mt-4 mx-2">Dashboard de medição</h1>
       <header className="py-4 pl-2 flex items-center justify-between select-none">
-        <div className="flex gap-4 mr-4">
-          <NavigationMenu>
-            <NavigationMenuList className="space-x-4">
-              <NavigationMenuItem
-                onClick={() => {
-                  setCurrentTabContext("init");
-                }}
-                className={`cursor-pointer text-primary-foreground p-2 rounded-sm hover:bg-primary transition-all ${
-                  currentTabContext === "init" ? "bg-primary" : "bg-blue-400"
-                }`}
-              >
-                Inicio
-              </NavigationMenuItem>
-              <NavigationMenuItem
-                onClick={() => {
-                  setCurrentTabContext("upload");
-                }}
-                className={`cursor-pointer text-primary-foreground p-2 rounded-sm hover:bg-primary transition-all ${
-                  currentTabContext === "upload" ? "bg-primary" : "bg-blue-400"
-                }`}
-              >
-                Nova medição
-              </NavigationMenuItem>
-              <NavigationMenuItem
-                onClick={() => {
-                  setCurrentTabContext("confirm");
-                }}
-                className={`cursor-pointer text-primary-foreground p-2 rounded-sm hover:bg-primary transition-all ${
-                  currentTabContext === "confirm" ? "bg-primary" : "bg-blue-400"
-                }`}
-              >
-                Confirmar medição
-              </NavigationMenuItem>
-              <NavigationMenuItem
-                onClick={() => {
-                  setCurrentTabContext("list");
-                }}
-                className={`cursor-pointer text-primary-foreground p-2 rounded-sm hover:bg-primary transition-all ${
-                  currentTabContext === "list" ? "bg-primary" : "bg-blue-400"
-                }`}
-              >
-                Listar medições
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
+        <CreateHomeMenu />
       </header>
       <main className="flex-1 bg-background p-8">
         {currentTabContext === "init" && (
