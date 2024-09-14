@@ -3,6 +3,8 @@
     - [Dependencies](#dependencies)
     - [Docker](#docker)
     - [Node](#node)
+      - [API](#api)
+      - [Web](#web)
   - [Tests](#tests)
 - [Documentation](#documentation)
 
@@ -12,11 +14,11 @@
 
 Technical test for the Junior Full-Stack Web Developer position.
 
-[Also access the version made in nest.JS](https://github.com/JoaoEmanuell/shopper-nestjs-technical-test)
+[Also check out the version made in NestJS](https://github.com/JoaoEmanuell/shopper-nestjs-technical-test)
 
 ## Getting Started
 
-Create a `.env` file at the root of the repository
+Create a `.env` file at the root of the repository.
 
 Fill the file with a [Gemini API key](https://ai.google.dev/gemini-api/docs/api-key).
 
@@ -40,23 +42,25 @@ Build the project using `docker compose`
 docker compose build
 ```
 
-Start the project (You can also run only this step and the project will be up and running)
+Start the project (You can also run just this step and the project will be live)
 
 ```
 docker compose up
 ```
 
-It will be available on port **8080**
+The web interface will be available on localhost, and the API will be accessible through port 3000.
 
 ### Node
 
-Go to the `shopper-node-technical-test` directory
+#### API
+
+Go to the `shopper-node-technical-test` directory.
 
 ```
 cd shopper-node-technical-test
 ```
 
-Copy the .env in root repository to current directory
+Copy the .env from the repository root to the current directory.
 
 ```
 cp ../.env .
@@ -68,41 +72,71 @@ Install the dependencies.
 npm install -y
 ```
 
-Run the setup
+Run the setup.
 
 ```
 node setup.mjs
 ```
 
-Run the prisma generate
+Run prisma generate.
 
 ```
 npm run prisma:generate
 ```
 
-Run the migrations
+Run the migrations.
 
 ```
 npm run migration:run
 ```
 
-Build the project
+Build the project.
 
 ```
 npm run build
 ```
 
-Start the project
+Run the project.
 
 ```
 npm run start
 ```
 
+The application will be available on **port 3000**.
+
+#### Web
+
+Go to the `shopper-front-end-technical-test` directory.
+
+```
+cd shopper-front-end-technical-test
+```
+
+Install the dependencies.
+
+```
+npm install -y
+```
+
+Build the application.
+
+```
+npm run build
+```
+
+Run the application.
+
+```
+npm run start
+```
+
+The application will be available on **port 8080**.
+
 ## Tests
 
-Go to the `shopper-node-technical-test` directory
+Go to the `shopper-node-technical-test` directory.
 
-Run the tests
+Run the tests.
 
 ```
 npm run test
@@ -110,6 +144,6 @@ npm run test
 
 # Documentation
 
-To access the documentation, see the [openapi](./docs/openapi.yaml) specification
+To access the documentation, see the [openapi specification](./docs/openapi.yaml).
 
-You can copy the contents of the file and use the [swagger editor](https://editor.swagger.io/) to view it.
+You can copy the content of the file and use the [Swagger editor](https://editor.swagger.io/) to view it.

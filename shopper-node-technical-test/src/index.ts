@@ -9,12 +9,33 @@ import { notFoundError } from "./utils/http/notFoundError";
 import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
 
-const PORT = 8080;
+const PORT = 3000;
+
+/**
+ * middleware function to handle CORS headers
+ * @param res
+ */
+const setCorsHeaders = (res: http.ServerResponse) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+};
 
 /**
  * Run the server
  */
 const server = http.createServer((req, res) => {
+  // CORS for all responses
+  setCorsHeaders(res);
+
+  // verify if request is a options and return a no content
+
+  if (req.method === "OPTIONS") {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
   if (req.url === "/upload" && req.method === "POST") {
     uploadController(req, res);
     return;

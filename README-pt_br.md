@@ -3,6 +3,8 @@
     - [Dependências](#dependências)
     - [Docker](#docker)
     - [Node](#node)
+      - [API](#api)
+      - [Web](#web)
   - [Testes](#testes)
 - [Documentação](#documentação)
 
@@ -45,9 +47,11 @@ Suba o projeto (Você também pode executar apenas essa etapa e o projeto já es
 docker compose up
 ```
 
-Ele estará disponível na porta **8080**
+A interface web estará disponível no localhost já a api estará acessível por meio da porta 3000.
 
 ### Node
+
+#### API
 
 Acesse o diretório `shopper-node-technical-test`
 
@@ -96,6 +100,36 @@ Execute o projeto
 ```
 npm run start
 ```
+
+A aplicação estará disponível na porta **3000**
+
+#### Web
+
+Acesse o diretório `shopper-front-end-technical-test`
+
+```
+cd shopper-front-end-technical-test
+```
+
+Faça a instalação das dependências.
+
+```
+npm install -y
+```
+
+Faça a build da aplicação
+
+```
+npm run build
+```
+
+Execute a aplicação
+
+```
+npm run start
+```
+
+A aplicação estará disponível na porta **8080**
 
 ## Testes
 
