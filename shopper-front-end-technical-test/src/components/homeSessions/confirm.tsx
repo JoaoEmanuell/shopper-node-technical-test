@@ -7,6 +7,7 @@ import { confirmSchema } from "@/schemas/confirmZodSchema";
 import { z } from "zod";
 import { GetAlert } from "../ui/getAlert";
 import { LastMeasureValueContext } from "@/contexts/lastMeasureValueContext";
+import { axios } from "@/lib/axios";
 
 export const HomeConfirmSession = () => {
   const [lastMeasureUUIDContext, setLastMeasureUUIDContext] = useContext(
@@ -38,11 +39,7 @@ export const HomeConfirmSession = () => {
       }
     }
 
-    const response = await fetch("http://localhost:3000/confirm", {
-      method: "PATCH",
-      mode: "cors",
-      body: JSON.stringify(data),
-    });
+    const response = await axios.patch("confirm", JSON.stringify(data));
     if (response.status === 200) {
       setAlert(
         <GetAlert
@@ -56,7 +53,7 @@ export const HomeConfirmSession = () => {
       response.status === 409 ||
       response.status === 404
     ) {
-      const json = await response.json();
+      const json = JSON.parse(response.data);
       setAlert(
         <GetAlert
           title="Error"

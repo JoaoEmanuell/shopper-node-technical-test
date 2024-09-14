@@ -11,7 +11,7 @@ export default function Home() {
   const [customerCode, setCustomerCode] = useState("");
   const [lastMeasureUUIDContext, setLastMeasureUUIDContext] = useState("");
   const [lastMeasureValueContext, setLastMeasureValueContext] = useState(0);
-  const [currentTabContext, setCurrentTabContext] = useState("list");
+  const [currentTabContext, setCurrentTabContext] = useState("upload");
 
   return (
     <CustomerCodeContext.Provider value={[customerCode, setCustomerCode]}>

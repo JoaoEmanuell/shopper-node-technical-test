@@ -16,6 +16,7 @@ import { LastMeasureUUIDContext } from "@/contexts/lastMeasureUUIDContext";
 import { LastMeasureValueContext } from "@/contexts/lastMeasureValueContext";
 import { CurrentTabContext } from "@/contexts/currentTabContext";
 import { Anchor } from "../ui/anchor";
+import { axios } from "@/lib/axios";
 
 type apiMeasureDataType = {
   image_url: string;
@@ -78,20 +79,16 @@ export const HomeUploadSession = () => {
 
     setNextButtonDisable(true);
 
-    const response = await fetch("http://localhost:3000/upload", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
+    const response = await axios.post("upload", JSON.stringify(data));
 
     if (response.status === 200) {
-      const json = await response.json();
+      const json = JSON.parse(response.data);
       setApiMeasureData(json as apiMeasureDataType);
       setLastMeasureUUIDContext(json["measure_uuid"]);
       setLastMeasureValueContext(json["measure_value"]);
       setStep(5); // end
     } else if (response.status === 400 || response.status === 409) {
-      const json = await response.json();
-      console.log(json);
+      const json = JSON.parse(response.data);
       setAlert(
         <GetAlert title="Erro" description={json["error_description"]} />
       );
